@@ -1,1 +1,2 @@
-je suis un message
+sudo docker build . -t exercice_1
+sudo docker run exercice_1

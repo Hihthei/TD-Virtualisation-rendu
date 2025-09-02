@@ -1,0 +1,1 @@
+sudo docker run -v $(pwd)/opt:/opt exercice_1
