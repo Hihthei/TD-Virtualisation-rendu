@@ -1,0 +1,29 @@
+services:
+  exercice_4:
+    image: postgres
+    environment:
+      POSTGRES_USER: john
+      POSTGRES_DB: doe
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+    secrets:
+      - POSTGRES_PASSWORD
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  debian_psql:
+    build: ./debian_psql
+    depends_on:
+      exercice_4:
+        condition: service_healthy
+    environment:
+      PGPASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+      PGUSER: ${POSTGRES_USER}
+      PGDATABASE: ${POSTGRES_DB}
+      PGHOST: exercice_4
+
+secrets:
+  POSTGRES_PASSWORD:
+    file: ./db_password.txt

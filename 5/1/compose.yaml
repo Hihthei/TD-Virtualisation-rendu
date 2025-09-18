@@ -1,0 +1,11 @@
+services:
+  exercice_1:
+    build: ./image
+    configs:
+      - source: message
+        target: /opt/msg.txt
+    command: ["/bin/cat", "/opt/msg.txt"]
+
+configs:
+  message:
+    file: ./msg.txt
