@@ -1,9 +1,8 @@
 services:
   exercice_4:
     image: postgres
+    env_file: .env
     environment:
-      POSTGRES_USER: john
-      POSTGRES_DB: doe
       POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
     secrets:
       - POSTGRES_PASSWORD
