@@ -1,0 +1,25 @@
+FROM debian:latest
+
+RUN apt update && apt install -y curl
+
+RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt install -y nodejs
+
+ADD package.json /app/
+ADD src/index.js /app/
+WORKDIR /app
+
+RUN npm install
+
+ADD . /app/
+
+CMD ["node", "index.js"]
+
+# Correction
+# FROM dockette/nodejs
+# WORKDIR /app
+# ADD package.json /app/
+# RUN npm install
+# ADD src /app/src
+# CMD ["npm", "start"]

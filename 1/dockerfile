@@ -1,0 +1,3 @@
+FROM debian:latest
+ADD exercice_1.sh /opt/exercice_1.sh
+CMD ["/bin/cat", "/opt/exercice_1.sh"]
